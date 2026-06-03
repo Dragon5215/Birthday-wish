@@ -145,8 +145,9 @@
 </head>
 <body>
 
-    <!-- Background Music (Optional: Change URL to your choice) -->
+    <!-- Happy Birthday Music Track Added Here -->
     <audio id="bg-music" loop>
+        <source src="https://actions.google.com/sounds/v1/celebrations/happy_birthday.ogg" type="audio/ogg">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
@@ -157,7 +158,6 @@
 
         <!-- Photo Slider -->
         <div class="gallery-container">
-            <!-- ⚠️ ඉතිරි පියවර බලලා මෙතනට ඔයාගේ Photo Links දාන්න -->
             <div class="slide active" style="background-image: url('photo1.jpg');"></div>
             <div class="slide" style="background-image: url('photo2.jpg');"></div>
             <div class="slide" style="background-image: url('photo3.jpg');"></div>
@@ -182,7 +182,7 @@
             heart.classList.add('heart-particle');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // 3s - 6s
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; 
             heart.style.fontSize = Math.random() * 15 + 15 + 'px';
             document.body.appendChild(heart);
             
@@ -201,16 +201,18 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-        setInterval(nextSlide, 3500); // Change image every 3.5 seconds
+        setInterval(nextSlide, 3500); 
 
         // Background Music Play/Pause
         const music = document.getElementById('bg-music');
         function toggleMusic() {
             if (music.paused) {
-                music.play();
+                music.play().catch(function(error) {
+                    console.log("Audio play failed: ", error);
+                });
                 document.querySelector('.music-btn').innerHTML = '⏸️ Pause Song';
             } else {
-                music.paused = true;
+                music.pause();
                 document.querySelector('.music-btn').innerHTML = '🎵 Play Our Song';
             }
         }
